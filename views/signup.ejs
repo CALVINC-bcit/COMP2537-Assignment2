@@ -1,8 +1,12 @@
 <%- include("templates/header" ) %>
-<form action="/submitUser" method="post">
-    <input name="name" type="text" placeholder="name" /><br />
-    <input name="username" type="email" placeholder="email" /><br />
-    <input name="password" type="password" placeholder="password" /><br />
-    <button>Submit</button>
-</form>
+<div class="mt-5 fs-1 mx-auto text-center">Sign up</div>
+<div class="input-group mb-3">
+    <form class="mt-3 mx-auto text-center"action="/submitUser" method="post">
+        <input name="name" type="text" placeholder="name" /><br />
+        <input name="username" type="email" placeholder="email" /><br />
+        <input name="password" type="password" placeholder="password" /><br />
+        <button class="btn btn-primary mt-3">Submit</button>
+    </form>
+    
+</div>
 <%- include("templates/footer" ) %>

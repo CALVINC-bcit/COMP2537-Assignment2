@@ -1,15 +1,20 @@
 <%- include("templates/header" ) %>
-<div class="my-5 mx-auto text-center">
-<h1>Login</h1>
-<form action="/loggingin" method="post">
-    <input name="username" type="email" placeholder="email" /><br />
-    <input name="password" type="password" placeholder ="password" /><br />
-    <button>Submit</button>
-</form>
-</div>
+    <div class="my-5 mx-auto text-center">
+        <div class="mt-5 fs-1">Login</div>
+        <div class="mt-3">
+            <form action="/loggingin" method="post">
+                <input name="username" type="email" placeholder="email" /><br />
+                <input name="password" type="password" placeholder="password" /><br />
+                <button class="btn btn-primary mt-3">Submit</button>
+            </form>
 
-<% if (typeof error != undefined && error) { %>
-    <p class="text-danger text-center mx-auto"><%= error %></p>
-    <!-- <h3 style='color:red;'><%= error %></h3> -->
-<% } %>
+        </div>
+    </div>
+
+    <% if (typeof error !=undefined && error) { %>
+        <p class="text-danger text-center mx-auto">
+            <%= error %>
+        </p>
+        <!-- <h3 style='color:red;'><%= error %></h3> -->
+        <% } %>
 <%- include("templates/footer" ) %>
