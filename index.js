@@ -8,13 +8,10 @@ const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
 let saltRounds = 12
+const expireTime = 1 * 60 * 60 * 1000;
 
 const port = process.env.PORT || 3000;
-
 const app = express();
-
-
-const expireTime = 1 * 60 * 60 * 1000;
 
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const mongodbUser = process.env.MONGODB_USER;
@@ -32,7 +29,7 @@ const userCollection = database.db(mongodb_database).collection("Users");
 app.set("view engine", "ejs");
 
 
-app.use(express.urlencoded({ extended: false }));
+
 
 var mongoStore = MongoStore.create({
     mongoUrl: `mongodb+srv://${mongodbUser}:${mongodbpw}@cluster0.yd3rf6r.mongodb.net/sessions`,
@@ -41,8 +38,6 @@ var mongoStore = MongoStore.create({
     }
 });
 
-
-
 app.use(session({
     secret: node_session_secret,
     store: mongoStore,
@@ -50,7 +45,7 @@ app.use(session({
     resave: true
 }));
 app.use(express.static(__dirname + "/public"));
-
+app.use(express.urlencoded({ extended: false }));
 
 function isAdmin(req) {
     if (req.session.user_type == "admin") {
@@ -71,6 +66,7 @@ function adminAuthorization(req, res, next) {
 }
 
 function isValidSession(req){
+    console.log(req.session);
     if(req.session.authenticated == true){
         return true;
     }
@@ -131,6 +127,8 @@ app.post("/submitUser", async (req, res) => {
         let hashedPass = await bcrypt.hashSync(password, saltRounds);
         req.session.authenticated = true;
         req.session.name = name;
+        req.session.username = username;
+        req.session.user_type = "normal";
         req.session.cookie.maxAge = expireTime;
 
         await userCollection.insertOne({ name: name, username: username, password: hashedPass, user_type:"normal" });
@@ -161,7 +159,7 @@ app.post("/loggingin", async (req, res) => {
     const validationResult = schema.validate({ username, password });
     if (validationResult.error != null) {
         console.log(validationResult.error);
-        res.redirect("/login?error=SQL injection");
+        res.render("login", {error:"SQL injection"});
         return;
     }
 
@@ -169,7 +167,7 @@ app.post("/loggingin", async (req, res) => {
 
     if (result.length != 1) {
         console.log("user not found");
-        res.redirect("/login?error=user not found");
+        res.render("login", {error:"User not found"});
         return;
     }
     if (await bcrypt.compare(password, result[0].password)) {
@@ -179,13 +177,12 @@ app.post("/loggingin", async (req, res) => {
         req.session.name = result[0].name;
         req.session.cookie.maxAge = expireTime;
         req.session.user_type = result[0].user_type;
-
         res.redirect('/');
         return;
     }
     else {
         console.log("incorrect password");
-        res.redirect("/login?error=incorrect password");
+        res.render("login", {error:"Incorrect password"});
         return;
     }
 });

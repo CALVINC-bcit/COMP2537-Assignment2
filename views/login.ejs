@@ -7,7 +7,9 @@
     <button>Submit</button>
 </form>
 </div>
-<% if (typeof foo == undefined) { %>
-    <h3 style='color:red;'><%= error %></h3>
+
+<% if (typeof error != undefined && error) { %>
+    <p class="text-danger text-center mx-auto"><%= error %></p>
+    <!-- <h3 style='color:red;'><%= error %></h3> -->
 <% } %>
 <%- include("templates/footer" ) %>

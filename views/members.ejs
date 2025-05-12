@@ -1,9 +1,12 @@
 <%- include("templates/header" ) %>
-<div class="row mb-3">
-    <div class="col-md-4"><img src="/cat1.png" class="img-fluid"></div>
-    <div class="col-md-4"><img src="/cat2.png" class="img-fluid"></div>
-    <div class="col-md-4"><img src="/cat3.png" class="img-fluid"></div>
+<div class="my-5 mx-auto text-center"></div>
+    <h1>Hello <%= name %></h1>
+    <div class="row mb-3">
+        <div class="col-md-4"><img src="/cat1.png" class="img-fluid"></div>
+        <div class="col-md-4"><img src="/cat2.png" class="img-fluid"></div>
+        <div class="col-md-4"><img src="/cat3.png" class="img-fluid"></div>
+    </div>
+
+    <a href="/logout"><button>Log out</button></a><br />
 </div>
-<h1>Hello <%= name %></h1>
-<a href="/logout"><button>Log out</button></a><br />
 <%- include("templates/footer" ) %>

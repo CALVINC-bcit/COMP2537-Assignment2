@@ -1,0 +1,14 @@
+<tr>
+    <td>
+        <%= user.name %>
+    </td>
+    <td>
+        <%= user.user_type %>
+    </td>
+    <td>
+        <a class="btn btn-primary" href="/updateUser?username=<%= user.username %>&amp;user_type=admin">Promote to
+            Admin</a>
+        <a class="btn btn-danger" href="/updateUser?username=<%= user.username %>&amp;user_type=normal">Demote to
+            user</a>
+    </td>
+</tr>
