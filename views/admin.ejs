@@ -1,0 +1,9 @@
+<%- include("templates/header" ) %>
+    <div>Users:</div>
+    <% for(let i = 0; i < users.length; i++) { %>
+    <li><%= users[i].name + " " + users[i].user_type%> 
+        <a href="/updateUser?username=<%= users[i].username %>&amp;user_type=admin">Promote to Admin</a> 
+        <a href="/updateUser?username=<%= users[i].username %>&amp;user_type=normal">Demote to user</a>'
+    </li>
+    <% } %>
+<%- include("templates/footer" ) %>    

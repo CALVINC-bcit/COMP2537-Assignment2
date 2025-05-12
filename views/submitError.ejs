@@ -1,0 +1,11 @@
+<%- include("templates/header" ) %>
+<% if (name === "") { %>
+    <p>Name is required <br /><br /><a href="/signup">Try again</a></p>
+<% } %>
+<% if (username === "") { %>
+    <p>Email is required <br /><br /><a href="/signup">Try again</a></p>
+<% } %> 
+<% if (password === "") { %>
+    <p>Password is required  <br /><br /><a href="/signup">Try again</a></p>
+<% } %>
+<%- include("templates/footer" ) %> 

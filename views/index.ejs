@@ -1,0 +1,12 @@
+<%- include("templates/header" ) %>
+<div class="my-5 mx-auto text-center">
+<% if(!authenticated) { %>
+    <a href="/signup"><button>Sign Up</button></a><br />
+    <a href="/login"><button>Login</button></a>
+<% } else {%>
+    <h1>Hello <%= name %></h1>
+    <a href="/members"><button>Go to Members Area</button></a><br />
+    <a href="/logout"><button>Log out</button></a><br />
+<% } %>
+</div>
+<%- include("templates/footer" ) %>
